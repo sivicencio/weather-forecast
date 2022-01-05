@@ -2,34 +2,35 @@ import React from 'react';
 import { createUseStyles } from 'react-jss';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import weatherCloudIcon from '../assets/weather-cloud.svg';
-import weatherDefaultIcon from '../assets/weather-default.svg'; // Credits to https://fontawesome.com/v5.15/icons/cloud?style=solid
-import weatherSunIcon from '../assets/weather-sun.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloud } from '@fortawesome/free-solid-svg-icons';
+import weatherCloudIcon from '../../assets/weather-cloud.svg';
+import weatherSunIcon from '../../assets/weather-sun.svg';
 
 const WEATHER_ICONS = {
   clear: weatherSunIcon,
   clouds: weatherCloudIcon,
-  default: weatherDefaultIcon,
 };
 
 const useStyles = createUseStyles((theme) => ({
   icon: {
-    filter: (props) =>
-      props.icon.toLowerCase() === 'clear'
-        ? theme.filters.alternative
-        : theme.filters.primary,
+    filter: theme.filters.alternative,
   },
 }));
 
 const WeatherIcon = function WeatherIcon({ icon, className }) {
   const classes = useStyles({ icon });
-  const iconSrc = WEATHER_ICONS[icon.toLowerCase()] || WEATHER_ICONS.default;
+  const iconSrc = WEATHER_ICONS[icon.toLowerCase()];
   const actualClassName = classNames({
-    [classes.icon]: icon.toLowerCase() !== 'clouds',
+    [classes.icon]: icon.toLowerCase() === 'clear',
     [className]: !!className,
   });
 
-  return <img alt={`${icon} icon`} className={actualClassName} src={iconSrc} />;
+  return iconSrc ? (
+    <img alt={`${icon} icon`} className={actualClassName} src={iconSrc} />
+  ) : (
+    <FontAwesomeIcon className={className} icon={faCloud} />
+  );
 };
 
 WeatherIcon.propTypes = {
