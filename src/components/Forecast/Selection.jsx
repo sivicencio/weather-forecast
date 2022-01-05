@@ -1,10 +1,14 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
+import { useSelector } from 'react-redux';
 import format from 'date-fns/format';
 import { forecastPropType } from '../../lib/prop-types';
+import { formatTemperature } from '../../lib/utils';
 import Icon from '../Icon';
 
-const LOCATION = 'Munich';
+const CITY_TRANSLATOR = {
+  München: 'Munich',
+};
 
 const useStyles = createUseStyles((theme) => ({
   selection: {
@@ -56,6 +60,7 @@ const ForecastSelection = function ForecastSelection({
   forecast: { measurements, summary, time },
 }) {
   const classes = useStyles();
+  const { city } = useSelector((state) => state.selection.location);
 
   return (
     <section className={classes.selection}>
@@ -63,11 +68,14 @@ const ForecastSelection = function ForecastSelection({
         <Icon className={classes.icon} icon={summary} />
       </div>
       <div className={classes.summary}>
-        <h1 className={classes.summaryPrimary}>{measurements.temp}°</h1>
+        <h1 className={classes.summaryPrimary}>
+          {formatTemperature(measurements.temp)}
+        </h1>
         <div className={classes.summarySecondary}>
           <span>{summary}</span>
           <span>
-            {measurements.tempMax}° / {measurements.tempMin}°
+            {formatTemperature(measurements.tempMax)} /{' '}
+            {formatTemperature(measurements.tempMin)}
           </span>
         </div>
       </div>
@@ -77,7 +85,7 @@ const ForecastSelection = function ForecastSelection({
           <br />
           {format(time, 'dd')}. {format(time, 'MMMM')}
         </h2>
-        <span>{LOCATION}</span>
+        <span>{CITY_TRANSLATOR[city] || city}</span>
       </div>
     </section>
   );

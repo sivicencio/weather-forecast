@@ -3,6 +3,7 @@ import { createUseStyles } from 'react-jss';
 import classNames from 'classnames';
 import format from 'date-fns/format';
 import { forecastPropType } from '../../lib/prop-types';
+import { formatTemperature } from '../../lib/utils';
 import Icon from '../Icon';
 
 const useStyles = createUseStyles((theme) => ({
@@ -55,7 +56,7 @@ const ForecastCard = function ForecastCard({
   return (
     <div className={jointClassNames}>
       <Icon className={classes.icon} icon={summary} />
-      <h3>{measurements.temp}°</h3>
+      <h3>{formatTemperature(measurements.temp)}</h3>
       <span>{format(time, 'HH:mm')}</span>
     </div>
   );

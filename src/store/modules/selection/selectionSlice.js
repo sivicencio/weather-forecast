@@ -3,6 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   forecast: undefined,
+  location: {
+    city: 'München',
+    country: 'DE',
+  },
 };
 
 const selectionSlice = createSlice({
