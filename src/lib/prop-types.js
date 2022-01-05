@@ -7,7 +7,7 @@ export const forecastPropType = PropTypes.shape({
     tempMin: PropTypes.number,
   }).isRequired,
   summary: PropTypes.string.isRequired,
-  time: PropTypes.instanceOf(Date).isRequired,
+  time: PropTypes.number.isRequired,
 });
 
 export default {
