@@ -12,27 +12,28 @@ const CITY_TRANSLATOR = {
 
 const useStyles = createUseStyles((theme) => ({
   selection: {
-    padding: '96px 8.5%',
+    padding: '48px 10% 24px 10%',
     display: 'flex',
+    flexWrap: 'wrap',
   },
   iconContainer: {
-    flex: 1,
+    width: '50%',
   },
   icon: {
-    width: '100%',
+    width: '70%',
     height: 'auto',
     '&.svg-inline--fa': {
-      width: '100%',
+      width: '70%',
     },
   },
   summary: {
-    flex: 1.5,
+    width: '50%',
     display: 'flex',
     flexDirection: 'column',
-    margin: '0 2em',
+    boxSizing: 'border-box',
   },
   summaryPrimary: {
-    fontSize: '5em',
+    fontSize: '4em',
     lineHeight: 1,
     margin: '32px 0',
     textAlign: 'center',
@@ -45,16 +46,58 @@ const useStyles = createUseStyles((theme) => ({
     color: theme.colors.secondary,
   },
   timeLocation: {
-    flex: 2,
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    textAlign: 'center',
     '& h2': {
       fontSize: '2em',
-      margin: '32px 0',
+      margin: '16px 0',
     },
     '& span': {
       order: -1,
       color: theme.colors.secondary,
+    },
+  },
+  '@media screen and (min-width: 576px)': {
+    selection: {
+      padding: '48px 10%',
+    },
+    summary: {
+      padding: '0 1em',
+    },
+    summaryPrimary: {
+      fontSize: '5em',
+    },
+  },
+  '@media screen and (min-width: 768px)': {
+    selection: {
+      padding: '64px 10%',
+    },
+  },
+  '@media screen and (min-width: 992px)': {
+    selection: {
+      padding: '96px 10%',
+    },
+    iconContainer: {
+      width: '20%',
+    },
+    summary: {
+      width: '45%',
+      padding: '0 2em',
+    },
+    timeLocation: {
+      width: '35%',
+      textAlign: 'left',
+      '& h2': {
+        margin: '32px 0',
+      },
+    },
+    icon: {
+      width: '100%',
+      '&.svg-inline--fa': {
+        width: '100%',
+      },
     },
   },
 }));
