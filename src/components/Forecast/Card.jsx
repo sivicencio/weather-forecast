@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import format from 'date-fns/format';
 import { forecastPropType } from '../../lib/prop-types';
 import { formatTemperature } from '../../lib/utils';
-import Icon from '../Icon';
+import Icon from '../UI/Icon';
 
 const useStyles = createUseStyles((theme) => ({
   active: {
@@ -43,6 +43,9 @@ const useStyles = createUseStyles((theme) => ({
     height: 'auto',
     margin: {
       top: 32,
+    },
+    '&.svg-inline--fa': {
+      width: '100%',
     },
   },
 }));

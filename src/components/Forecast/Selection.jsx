@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import format from 'date-fns/format';
 import { forecastPropType } from '../../lib/prop-types';
 import { formatTemperature } from '../../lib/utils';
-import Icon from '../Icon';
+import Icon from '../UI/Icon';
 
 const CITY_TRANSLATOR = {
   München: 'Munich',
@@ -21,6 +21,9 @@ const useStyles = createUseStyles((theme) => ({
   icon: {
     width: '100%',
     height: 'auto',
+    '&.svg-inline--fa': {
+      width: '100%',
+    },
   },
   summary: {
     flex: 1.5,
