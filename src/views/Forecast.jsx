@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useGetForecastQuery } from '../api/forecast';
 import Card from '../components/Forecast/Card';
 import Selection from '../components/Forecast/Selection';
+import Fullscreen from '../components/UI/Fullscreen';
+import Loading from '../components/UI/Loading';
 import { updateForecastSelection } from '../store/modules/selection/selectionSlice';
 
 const KELVIN_TO_CELSIUS = 273.15;
@@ -59,9 +61,22 @@ const Forecast = function Forecast() {
     }
   }, [dispatch, forecastList]);
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) {
+    return (
+      <Fullscreen>
+        <Loading size="4x" />
+      </Fullscreen>
+    );
+  }
 
-  if (isError) return <h1>Error</h1>;
+  if (isError) {
+    return (
+      <Fullscreen>
+        <h1>Oops</h1>
+        <p>Sorry, something went wrong when fetching weather data</p>
+      </Fullscreen>
+    );
+  }
 
   return (
     <main className={classes.mainContainer}>
