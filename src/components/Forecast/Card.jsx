@@ -13,22 +13,18 @@ const useStyles = createUseStyles((theme) => ({
     backgroundColor: theme.colors.active,
   },
   card: {
-    marginLeft: 24,
-    padding: '0.75em 1em',
+    padding: '1.25em 1em',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     borderRadius: 6,
-    '&:last-child': {
-      marginRight: 24,
-    },
     '&:hover,&:focus-visible': {
       backgroundColor: theme.colors.hover,
       cursor: 'pointer',
       outline: 'none',
     },
     '& h3': {
-      fontSize: '2em',
+      fontSize: '2.5em',
       margin: {
         top: 32,
       },
@@ -36,16 +32,64 @@ const useStyles = createUseStyles((theme) => ({
     '& span:last-child': {
       order: -1,
       color: theme.colors.secondary,
+      fontSize: '1.5em',
     },
   },
-  icon: {
+  iconContainer: {
     width: '100%',
+    height: 125,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  icon: {
+    width: '70%',
     height: 'auto',
     margin: {
       top: 32,
     },
     '&.svg-inline--fa': {
+      width: '70%',
+    },
+  },
+  '@media screen and (min-width: 576px)': {
+    card: {
+      padding: '1em',
+    },
+    icon: {
+      width: '80%',
+      '&.svg-inline--fa': {
+        width: '80%',
+      },
+    },
+  },
+  '@media screen and (min-width: 768px)': {
+    card: {
+      '& h3': {
+        fontSize: '2em',
+      },
+      '& span:last-child': {
+        fontSize: '1em',
+      },
+    },
+    icon: {
       width: '100%',
+      '&.svg-inline--fa': {
+        width: '100%',
+      },
+    },
+  },
+  '@media screen and (min-width: 992px)': {
+    card: {
+      padding: '1em',
+      '& h3': {
+        fontSize: '1.6em',
+      },
+    },
+  },
+  '@media screen and (min-width: 1400px)': {
+    card: {
+      padding: '0.75em 1em',
     },
   },
 }));
@@ -78,7 +122,9 @@ const ForecastCard = function ForecastCard({
       role="button"
       tabIndex={0}
     >
-      <Icon className={classes.icon} icon={summary} />
+      <div className={classes.iconContainer}>
+        <Icon className={classes.icon} icon={summary} />
+      </div>
       <h3>{formatTemperature(measurements.temp)}</h3>
       <span>{format(time, 'HH:mm')}</span>
     </div>

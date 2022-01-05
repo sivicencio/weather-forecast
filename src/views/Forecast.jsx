@@ -37,11 +37,56 @@ function processForecastData(data) {
 
 const useStyles = createUseStyles({
   mainContainer: {
-    fontSize: 42,
+    fontSize: 20,
   },
+  /* Based on https://uxdesign.cc/creating-horizontal-scrolling-containers-the-right-way-css-grid-c256f64fc585 */
   cardsContainer: {
-    display: 'flex',
+    display: 'grid',
     overflowX: 'auto',
+    gridGap: 24,
+    gridAutoFlow: 'column',
+    gridAutoColumns: 'calc(50% - 24px * 2)',
+    padding: '0 24px',
+  },
+  '@media screen and (min-width: 576px)': {
+    mainContainer: {
+      fontSize: 24,
+    },
+    cardsContainer: {
+      gridAutoColumns: 'calc(100% / 3 - 24px * 2)',
+    },
+  },
+  '@media screen and (min-width: 768px)': {
+    mainContainer: {
+      fontSize: 28,
+    },
+    cardsContainer: {
+      gridAutoColumns: 'calc(100% / 5)',
+    },
+  },
+  '@media screen and (min-width: 992px)': {
+    mainContainer: {
+      fontSize: 32,
+    },
+    cardsContainer: {
+      gridAutoColumns: 'calc(100% / 6)',
+    },
+  },
+  '@media screen and (min-width: 1200px)': {
+    mainContainer: {
+      fontSize: 36,
+    },
+    cardsContainer: {
+      gridAutoColumns: 'calc(100% / 8)',
+    },
+  },
+  '@media screen and (min-width: 1400px)': {
+    mainContainer: {
+      fontSize: 42,
+    },
+    cardsContainer: {
+      gridAutoColumns: 'calc(100% / 9)',
+    },
   },
 });
 
