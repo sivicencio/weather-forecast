@@ -68,7 +68,11 @@ const Forecast = function Forecast() {
       {selectedForecast && <Selection forecast={selectedForecast} />}
       <section className={classes.cardsContainer}>
         {forecastList.map((forecast) => (
-          <Card key={forecast.time} forecast={forecast} />
+          <Card
+            key={forecast.time}
+            forecast={forecast}
+            onClick={() => dispatch(updateForecastSelection(forecast))}
+          />
         ))}
       </section>
     </main>

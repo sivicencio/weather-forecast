@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { createUseStyles } from 'react-jss';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import format from 'date-fns/format';
 import { forecastPropType } from '../../lib/prop-types';
@@ -20,9 +22,10 @@ const useStyles = createUseStyles((theme) => ({
     '&:last-child': {
       marginRight: 24,
     },
-    '&:hover': {
+    '&:hover,&:focus-visible': {
       backgroundColor: theme.colors.hover,
       cursor: 'pointer',
+      outline: 'none',
     },
     '& h3': {
       fontSize: '2em',
@@ -46,15 +49,32 @@ const useStyles = createUseStyles((theme) => ({
 
 const ForecastCard = function ForecastCard({
   forecast: { measurements, summary, time },
+  onClick,
 }) {
+  const selectedForecast = useSelector((state) => state.selection.forecast);
   const classes = useStyles();
   const jointClassNames = classNames({
     [classes.card]: true,
-    [classes.active]: Math.random() > 0.9,
+    [classes.active]: selectedForecast?.time === time,
   });
 
+  const handleKeyPress = useCallback(
+    (event) => {
+      if (event.code === 'Enter' || event.code === 'Space') {
+        onClick();
+      }
+    },
+    [onClick]
+  );
+
   return (
-    <div className={jointClassNames}>
+    <div
+      className={jointClassNames}
+      onClick={onClick}
+      onKeyPress={handleKeyPress}
+      role="button"
+      tabIndex={0}
+    >
       <Icon className={classes.icon} icon={summary} />
       <h3>{formatTemperature(measurements.temp)}</h3>
       <span>{format(time, 'HH:mm')}</span>
@@ -64,6 +84,7 @@ const ForecastCard = function ForecastCard({
 
 ForecastCard.propTypes = {
   forecast: forecastPropType.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ForecastCard;
