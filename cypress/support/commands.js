@@ -23,3 +23,23 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('interceptWeatherForecastRequest', () => {
+  cy.intercept(
+    {
+      method: 'GET',
+      url: '**/data/2.5/forecast*',
+    },
+    { fixture: 'forecast.json' }
+  ).as('getWeatherForecast');
+});
+
+Cypress.Commands.add('interceptWeatherForecastRequestWithError', () => {
+  cy.intercept(
+    {
+      method: 'GET',
+      url: '**/data/2.5/forecast*',
+    },
+    { statusCode: 500 }
+  ).as('getWeatherForecastWithError');
+});
