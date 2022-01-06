@@ -39,6 +39,7 @@ The following screenshot was taken from that demo:
   - Yarn 1.22.17
 - Redux and [Redux Toolkit](https://redux-toolkit.js.org/) for state management
 - React JSS for CSS-in-JS features
+- [Font Awesome](https://fontawesome.com/) for a few icons
 - date-fns for dates manipulation
 - ESLint and prettier for code quality and formatting
 - Cypress for testing
@@ -149,7 +150,24 @@ The project currently includes 2 Github Actions:
 Both of these actions are run when opening a PR (and also when adding new commits to that PR), and are configured as required status checks for merging. This means that a PR cannot be merged if the status checks do not pass. This allows us to have a safer codebase, because we can be sure that at least the existing testing suite and the code quality requirements are met.
 
 ### Deployment
+
+As mentioned in the [First ideas](#first-ideas) section, the application is configured to be deployed using Netlify. A deployment is triggered whenever a Pull Request (PR) is merged into the `main` branch, so that way an up-to-date version of the application is immediately available as a demo.
+
+This behavior makes an important assumption: **the `main` branch has to be stable**. In this case, we can be pretty sure that it's likely to be stable, because of the CI configuration in place, which runs the code quality and testing Github Actions. No code will make it to the `main` branch if these status checks do not pass.
+
+The **demo of the application** deployed in Netlify [can be found here](https://condescending-jepsen-b6607a.netlify.app/). Consider that the Proxy API used by the SPA is hosted in Heroku as part of a free plan, so if not used for some time, the process hosting the API is asleep and takes some seconds to wake up. This translates to a longer period with a loading spinner displayed in the SPA. Be patient if that happens to you, please. The results will arrive eventually.
 ### Considerations and decisions
+
+Besides the decisions mentioned in the [First ideas](#first-ideas) section, the following considerations and decisions were made when doing this challenge:
+
+1. The Figma prototype was considered as a source of truth. This means that it was implemented as similar as possible, not including more features that what could be seen there
+2. The only feature extracted from the Figma prototype that has me as the author, is the responsive layout for smaller screen sizes
+3. The spacing and sizes were taken as a reference, trying to be as close as possible to the Figma prototype. However, since a responsive layout was implemented, at the end the implementation is based on proportions rather than fixed values. These proportions produce a similar result to the one in the prototype, but not the same
+4. The OpenWeatherApi includes more than just a "Clear" and "Clouds" forecasts, however, only icons for that pair of forecast were provided for this challenge. For this reason, an icon with a cloud was used (thanks to Font Awesome) for any other type of forecast ("Rain", for example)
 
 ## Future work
 
+- **Provide a search input for locations** (or a select with a number of pre-defined locations). Right now the application only shows the forecast for Munich. The Redux store currently includes a state for the location, which is used to perform the API request, so only the "mutation" part would need to be implemented
+- **Add a visual cue indicating that a horizontal scroll is available**. It could be a pair of arrows almost transparent of disappearing after a few seconds. Currently the implementation shows in several screen sizes a fragment of an incomplete forecast item, as a hint that the user can actually scroll
+- **Add icons suitable for different types of forecast**. Currently a cloud icon is used for any forecast different than "Clear" or "Clouds"
+- **Add a code coverage tool for the testing process**. Even though the current test suite is simple, it would be better to have metrics about the coverage
