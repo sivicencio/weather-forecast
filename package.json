@@ -25,10 +25,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cypress open",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .js,.jsx src",
-    "lint-fix": "eslint --ext .js,.jsx src --fix",
+    "lint": "eslint --ext .js,.jsx src cypress",
+    "lint-fix": "eslint --ext .js,.jsx src cypress --fix",
     "check-format": "yarn prettier --check .",
     "format": "yarn prettier --write ."
   },
@@ -37,7 +37,8 @@
       "react-app",
       "react-app/jest",
       "airbnb",
-      "prettier"
+      "prettier",
+      "plugin:cypress/recommended"
     ]
   },
   "browserslist": {
@@ -53,9 +54,11 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^9.2.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "19.0.2",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.27.1",
