@@ -47,6 +47,7 @@ The following screenshot was taken from that demo:
 ### Features
 
 The following features can be almost directly mapped to the requirements of the coding challenge:
+
 - Single page application (SPA) capable of fetching and displaying data from the [OpenWeatherMap 5 day weather forecast API](https://openweathermap.org/forecast5)
 - Presenting the data based on a pre-defined design available as a Figma prototype
 - Responsive behavior considering at least mobile, tablets and desktop screens
@@ -62,6 +63,7 @@ cd weather-forecast
 ```
 
 You will need to add 2 environment variables, which are critical for the application to work:
+
 - `REACT_APP_API_KEY`: should be set to the API key obtained from the OpenWeatherMap API
 - `REACT_APP_API_URL`: should be set to the base URL of the API. Please check the [Proxy API](#proxy-api) section below to get more details
 
@@ -110,6 +112,7 @@ You need to have Cypress installed in your computer, but when installing the app
 When first encountered with the challenge, I wrote a list of general requirements and things to have in consideration that allowed me to have a big picture of what needed to be done or, in other words, the scope of the project.
 
 With this picture in mind, I started to organize the project in tasks, following an approach that would allow me to incrementally and at the same time iteratively make progress towards a final solution. In this process I made the following definitions:
+
 - Use ESLint with the Airbnb style guide and prettier for code quality and formatting
 - Add an end-to-end testing suite with Cypress
 - Follow the Github Flow development workflow (for feature branches and Pull Requests)
@@ -144,6 +147,7 @@ When merging PRs, the "Squash and merge" strategy was used, which condenses the 
 ### CI
 
 The project currently includes 2 Github Actions:
+
 - Linting and formatting, using ESLint with Airbnb config and prettier, respectively
 - Cypress Testing for E2E testing
 
@@ -156,6 +160,7 @@ As mentioned in the [First ideas](#first-ideas) section, the application is conf
 This behavior makes an important assumption: **the `main` branch has to be stable**. In this case, we can be pretty sure that it's likely to be stable, because of the CI configuration in place, which runs the code quality and testing Github Actions. No code will make it to the `main` branch if these status checks do not pass.
 
 The **demo of the application** deployed in Netlify [can be found here](https://condescending-jepsen-b6607a.netlify.app/). Consider that the Proxy API used by the SPA is hosted in Heroku as part of a free plan, so if not used for some time, the process hosting the API is asleep and takes some seconds to wake up. This translates to a longer period with a loading spinner displayed in the SPA. Be patient if that happens to you, please. The results will arrive eventually.
+
 ### Considerations and decisions
 
 Besides the decisions mentioned in the [First ideas](#first-ideas) section, the following considerations and decisions were made when doing this challenge:
