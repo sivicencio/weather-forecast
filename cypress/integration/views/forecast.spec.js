@@ -9,6 +9,7 @@ describe('Forecast view', () => {
 
     it('shows a loading spinner at the beginning', () => {
       cy.get('.fa-spinner').should('be.visible');
+      cy.wait('@getWeatherForecast');
     });
 
     it('removes the loading spinner after the API request is done', () => {
